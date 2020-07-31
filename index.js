@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const nodemailer = require("nodemailer");
 const flashMiddleware = require("./middlewares/flash");
-const Mail = require("./middlewares/mail");
 
 let csrfProtection = csrf({ cookie: true });
 const app = express();
