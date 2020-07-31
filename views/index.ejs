@@ -1,0 +1,52 @@
+<%- include ('layouts/header.ejs') %>
+
+<form action="/send" method="post" class="g-3">
+  <legend class="border-r">
+    <h3>Envoyer un email</h3>
+  </legend>
+  <div class="col-auto mb-3">
+    <input
+      type="hidden"
+      name="_csrf"
+      value="<%= csrfToken %>"
+      class="form-control"
+    />
+  </div>
+  <div class="col-auto mb-3">
+    <label for="email" class="sr-only">Email</label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      placeholder="Entrez une adresse email"
+      class="form-control"
+    />
+  </div>
+  <div class="col-auto mb-3">
+    <label for="object" class="sr-only">Object du message</label>
+    <input
+      type="text"
+      name="object"
+      id="object"
+      placeholder="Objet du message"
+      class="form-control"
+    />
+  </div>
+  <div class="col-auto mb-3">
+    <label for="message" class="sr-only">Votre message</label>
+    <textarea
+      name="message"
+      id="message"
+      cols="30"
+      class="form-control"
+      rows="5"
+      placeholder="Commencez à ecrire votre message..."
+    ></textarea>
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-success mb-3">
+      Envoyer message
+    </button>
+  </div>
+</form>
+<%- include ('layouts/footer.ejs') %>
