@@ -1,6 +1,6 @@
 <%- include ('layouts/header.ejs') %>
 
-<form action="/send" method="post" class="g-3">
+<form action="/send" method="post" class="g-3 shadow p-4">
   <legend class="border-r">
     <h3>Envoyer un email</h3>
   </legend>
@@ -39,6 +39,7 @@
       id="message"
       cols="30"
       class="form-control"
+      style="resize: none;"
       rows="5"
       placeholder="Commencez à ecrire votre message..."
     ></textarea>

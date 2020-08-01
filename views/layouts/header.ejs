@@ -9,21 +9,55 @@
       integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
       crossorigin="anonymous"
     />
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title>Mister Juslin!</title>
   </head>
   <body>
-    <div class="container m-5 my-10 w-full">
+    <div class="container mx-6 mt-3 my-10 w-full">
       <div class="row flex justify-content-center">
-        <h1><%= title %></h1>
+        <h1 class="border bg-secondary text-white p-2 shadow text-center">
+          <%= title %>
+        </h1>
+
         <% if (locals.flash && locals.flash.error) { %>
-        <div class="alert alert-danger" role="alert">
-          <%= flash.error %>
-        </div>
+        <script type="text/javascript">
+          window.onload = function () {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top",
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              onOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+              },
+            });
+            Toast.fire({
+              icon: "error",
+              title: `<%= flash.error %>`,
+            });
+          };
+        </script>
+        <% } %> <% if (locals.flash && locals.flash.success) { %>
+        <script type="text/javascript">
+          window.onload = function () {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              onOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+              },
+            });
+            Toast.fire({
+              icon: "success",
+              title: `<%= flash.success %>`,
+            });
+          };
+        </script>
         <% } %>
 
-        <% if (locals.flash && locals.flash.success) { %>
-          <div class="alert alert-success" role="alert">
-            <%= flash.success %> 
-          </div>
-        <% } %>

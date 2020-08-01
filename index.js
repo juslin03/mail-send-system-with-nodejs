@@ -31,8 +31,9 @@ app.use(
 app.use(flashMiddleware);
 
 app.get("/", csrfProtection, (req, res) => {
+  // console.log(req.isAuthenticated())
   res.render("index", {
-    title: "Systeme d'envoie d'email",
+    title: "Systeme d'envoie de mail",
     csrfToken: req.csrfToken(),
   });
   //   main().catch(console.error);
@@ -58,6 +59,7 @@ app.post("/send", csrfProtection, (req, res) => {
       // create transporter
       let transporter = nodemailer.createTransport({
         service: "gmail",
+        port: process.env.PORT,
         auth: {
           user: process.env.EMAIL,
           pass: process.env.PASS,
@@ -69,7 +71,7 @@ app.post("/send", csrfProtection, (req, res) => {
         from: process.env.EMAIL,
         to: mail,
         subject: object,
-        text: message,
+        html: message,
       };
 
       await transporter.sendMail(mailOptions, (err, info) => {
@@ -79,7 +81,7 @@ app.post("/send", csrfProtection, (req, res) => {
 
     try {
       main();
-      req.flash("success", "Félicitation, Votre message à bien été envoyé !");
+      req.flash("success", "Félicitation, Votre message a bien été envoyé !");
       res.redirect("back");
     } catch (error) {
       console.error(error);
